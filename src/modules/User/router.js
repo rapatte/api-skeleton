@@ -1,11 +1,8 @@
 import { Router } from 'express';
 import userController from './controller';
 
-const entrypoint = '/users';
-const userRouter = Router();
-
-userRouter
-    .route(entrypoint)
+Router()
+    .route('/users')
     .get(userController.getAll)
     .post(userController.register);
 
