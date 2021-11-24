@@ -1,5 +1,5 @@
-import userRouter from './User';
-import bookRouter from './Book';
+import userRouter from './User/router';
+import bookRouter from './Book/router';
 
 const routes = [userRouter, bookRouter];
 

@@ -8,6 +8,6 @@ userRouter
     .get(userController.getAll)
     .post(userController.register);
 
-userRouter.route(`${entrypoint}/auth`).post(userController.login);
+userRouter.route('/users/auth').post(userController.login);
 
 export default userRouter;
