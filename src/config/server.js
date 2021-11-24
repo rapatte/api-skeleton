@@ -6,7 +6,7 @@ class Server {
 
     middlewares(middlewares) {
         for (const key in middlewares) {
-            this.#http.use(middleware[key]);
+            this.#http.use(middlewares[key]);
         }
     }
 
