@@ -1,14 +1,18 @@
-import express from 'express';
-import env from './src/config/env';
+import config from './src/config/env';
 import Server from './src/config/server';
+import express from 'express';
 import middlewares from './src/config/middlewares';
-import errorHandler from './src/middlewares/errorHandler';
 import routes from './src/modules';
+import db from './src/config/db';
 
-const http = express();
-const server = new Server(http);
-server.middlewares(middlewares);
-server.routes(routes);
-server.errorHandler(errorHandler);
+const api = new Server(express, middlewares, routes);
 
-server.start(env.appPort);
+(async () => {
+    try {
+        await db.associateAll(db.sequelize.models);
+        await db.sequelize.sync({ alter: true });
+        await api.listen(config.appPort);
+    } catch (e) {
+        console.error(e);
+    }
+})();
