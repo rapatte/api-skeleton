@@ -1,7 +1,6 @@
-import UserRouter from './User';
+import userRouter from './User';
+import bookRouter from './Book';
 
-const routes = {
-    '/users': UserRouter,
-};
+const routes = [userRouter, bookRouter];
 
 export default routes;

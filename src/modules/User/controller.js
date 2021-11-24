@@ -1,21 +1,33 @@
-import ApiError from '../../helpers/ApiError';
+import User from './model';
 
-class UserController {
-    #models;
-    constructor(models) {
-        this.#models = models;
-    }
-
-    login = async (req, res, next) => {
+const userController = {
+    getAll: async ({ res, next }) => {
         try {
-            // const newUser = await this.#models.User.findOne()
-            if (true) throw new ApiError('error message', 403);
-
-            res.status(200).json('youpi');
-        } catch (error) {
-            next(error);
+            const users = await User.findAll();
+            res.status(200).json(users);
+        } catch (e) {
+            next(e);
         }
-    };
-}
+    },
+    register: async ({ res, req, next }) => {
+        try {
+            const user = await User.create(...req.body);
+            res.status(201).json(user);
+        } catch (e) {
+            next(e);
+        }
+    },
+    login: async ({ res, req, next }) => {
+        try {
+            const { mail, password } = { ...req.body };
+            const user = await User.findOne({
+                where: { mail, password },
+            });
+            res.status(200).json(user);
+        } catch (e) {
+            next(e);
+        }
+    },
+};
 
-export default UserController;
+export default userController;
