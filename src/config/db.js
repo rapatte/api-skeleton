@@ -2,10 +2,10 @@ import { Sequelize } from 'sequelize';
 import config from './env';
 
 const sequelize = new Sequelize(
-    config.db_name,
-    config.db_user,
-    config.db_password,
-    { dialect: 'mysql', port: config.db_port, host: config.db_host }
+    config.dbName,
+    config.dbUser,
+    config.dbPassword,
+    { dialect: 'mysql', port: config.dbPort, host: config.dbHost }
 );
 
 const associateAll = async (models) => {
